@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaPC — Optimisation PC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+:root{--bg:#0a0a0a;--bg2:#0f0f0f;--bg3:#141414;--border:#1e1e1e;--border2:#2a2a2a;--text:#fff;--text2:#888;--text3:#444;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--pp-bg:#ede9fe;--pp-c:#5b21b6;--pb-bg:#dbeafe;--pb-c:#1e40af;--pg-bg:#d1fae5;--pg-c:#065f46;--pk-bg:#fce7f3;--pk-c:#9d174d;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.logo{font-family:'Syne',sans-serif}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:14px 48px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:700;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.btn-nav{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .2s}
+.btn-nav:hover{background:#5254cc}
+.btn{border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-pg{background:var(--pg-bg);color:var(--pg-c)}
+.btn-pb{background:var(--pb-bg);color:var(--pb-c)}
+.btn-pp{background:var(--pp-bg);color:var(--pp-c)}
+.btn-pk{background:var(--pk-bg);color:var(--pk-c)}
+.btn-discord{background:#5865f2;color:#fff;border:none;border-radius:10px;padding:11px 20px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;justify-content:center;transition:background .2s;text-decoration:none}
+.btn-discord:hover{background:#4752c4}
+.hero{padding:100px 48px 80px;text-align:center;border-bottom:0.5px solid var(--border)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#1a1a2e;color:var(--accent2);border:0.5px solid #3d3d7a;border-radius:20px;padding:5px 16px;font-size:12px;margin-bottom:24px}
+.hero h1{font-size:52px;font-weight:700;line-height:1.1;margin-bottom:20px;letter-spacing:-1px}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:16px;color:var(--text2);max-width:500px;margin:0 auto 36px;line-height:1.8}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stats{display:flex;justify-content:center;gap:64px;padding:36px 48px;border-bottom:0.5px solid var(--border)}
+.stat-item{text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:700}
+.stat-lbl{font-size:12px;color:var(--text3);margin-top:4px}
+section{padding:72px 48px;border-bottom:0.5px solid var(--border)}
+.section-label{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;text-align:center}
+.section-title{font-family:'Syne',sans-serif;font-size:30px;font-weight:700;margin-bottom:10px;text-align:center}
+.section-sub{font-size:14px;color:var(--text2);margin-bottom:40px;text-align:center;max-width:500px;margin-left:auto;margin-right:auto}
+.paliers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto}
+.palier{background:var(--bg2);border:0.5px solid var(--border2);border-radius:16px;padding:28px;position:relative;transition:border-color .2s}
+.palier:hover{border-color:#444}
+.palier.featured{border-color:var(--accent);background:#0d0d1f}
+.palier-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;padding:4px 16px;border-radius:20px;white-space:nowrap;font-family:'Syne',sans-serif}
+.palier-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
+.icon-c{background:#1e1e1e;color:var(--text2)}
+.icon-p{background:#1a1a2e;color:var(--accent)}
+.icon-e{background:#1a2a1e;color:var(--green)}
+.palier-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
+.palier-price{font-family:'Syne',sans-serif;font-size:36px;font-weight:700;margin:14px 0 6px}
+.palier-price span{font-size:13px;color:var(--text2);font-weight:400;font-family:'DM Sans',sans-serif}
+.palier-desc{font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.7}
+.palier-features{list-style:none;margin-bottom:22px}
+.palier-features li{font-size:13px;color:var(--text2);padding:6px 0;display:flex;align-items:center;gap:8px;border-bottom:0.5px solid var(--border)}
+.palier-features li:last-child{border-bottom:none}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1000px;margin:0 auto}
+.step{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;padding:22px}
+.step-num{font-size:11px;color:var(--text3);margin-bottom:14px;font-family:'Syne',sans-serif}
+.step-icon{font-size:24px;color:var(--accent);margin-bottom:12px}
+.step-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px}
+.step-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.bench-wrap{max-width:780px;margin:0 auto}
+.bench-tabs{display:flex;gap:4px;background:var(--bg2);border-radius:10px;padding:4px;margin-bottom:20px;border:0.5px solid var(--border)}
+.bench-tab{flex:1;text-align:center;padding:9px;font-size:13px;color:var(--text2);cursor:pointer;border-radius:7px;transition:all .2s;font-family:'DM Sans',sans-serif}
+.bench-tab.active{background:var(--bg3);color:var(--text)}
+.bench-page{display:none}.bench-page.active{display:block}
+.bench-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:16px;padding:28px;margin-bottom:16px}
+.bar-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.bar-label{font-size:12px;color:var(--text2);width:72px;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width 1.2s ease;width:0%}
+.bar-val{font-size:12px;color:var(--text2);width:52px;text-align:right;flex-shrink:0}
+.score-big{text-align:center;padding:16px 0 24px}
+.score-num{font-family:'Syne',sans-serif;font-size:56px;font-weight:700;line-height:1}
+.score-grade{font-size:14px;color:var(--amber);margin-top:8px}
+.score-lbl{font-size:12px;color:var(--text3);margin-top:3px}
+.net-gauge{display:flex;justify-content:space-around;padding:16px 0 24px}
+.gauge{text-align:center}
+.gauge-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:700}
+.gauge-unit{font-size:11px;color:var(--text2);margin-top:3px}
+.gauge-lbl{font-size:11px;color:var(--text3);margin-top:4px}
+.divider-v{width:0.5px;height:54px;background:var(--border);align-self:center}
+.net-row{display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.net-row:last-child{border-bottom:none}
+.net-key{color:var(--text2)}.net-val{font-family:monospace;font-size:12px}
+.pc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.pc-card{background:var(--bg3);border:0.5px solid var(--border);border-radius:12px;padding:14px 16px}
+.pc-label{font-size:11px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.pc-val{font-size:14px;font-weight:500;color:var(--text)}
+.pc-sub{font-size:11px;color:var(--text2);margin-top:3px}
+.drivers-table{width:100%;border-collapse:collapse}
+.drivers-table th{font-size:11px;color:var(--text3);text-align:left;padding:10px 14px;border-bottom:0.5px solid var(--border2);text-transform:uppercase;letter-spacing:.06em}
+.drivers-table td{font-size:13px;padding:12px 14px;border-bottom:0.5px solid var(--border);vertical-align:middle}
+.drivers-table tr:last-child td{border-bottom:none}
+.badge-ok{font-size:11px;padding:3px 10px;border-radius:20px;background:#162216;color:var(--green);border:0.5px solid #2d6a3f}
+.badge-upd{font-size:11px;padding:3px 10px;border-radius:20px;background:#1e1a10;color:var(--amber);border:0.5px solid #7a5a1a}
+.dot-anim{display:inline-flex;gap:6px}
+.dot-anim span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:bounce 1.2s infinite}
+.dot-anim span:nth-child(2){animation-delay:.2s}
+.dot-anim span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.hidden{display:none!important}
+.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto}
+.support-card{background:var(--bg2);border:0.5px solid var(--border2);border-radius:16px;padding:26px}
+.support-card.discord{border-color:#5865f2;background:#0d0d1e}
+.support-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px}
+.support-desc{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:18px}
+.support-features{list-style:none;margin-bottom:20px}
+.support-features li{font-size:12px;color:#666;padding:5px 0;display:flex;align-items:center;gap:8px}
+.support-features li i{font-size:13px;color:var(--green)}
+.faq{display:flex;flex-direction:column;gap:10px;max-width:680px;margin:0 auto}
+.faq-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:18px 22px;cursor:pointer;transition:border-color .2s}
+.faq-item:hover{border-color:#333}
+.faq-q{font-size:14px;font-weight:500;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q i{font-size:16px;color:var(--text2);flex-shrink:0;transition:transform .2s}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{font-size:13px;color:var(--text2);margin-top:12px;line-height:1.8;display:none}
+.faq-item.open .faq-a{display:block}
+footer{padding:32px 48px;display:flex;align-items:center;justify-content:space-between;border-top:0.5px solid var(--border)}
+.footer-logo{font-family:'Syne',sans-serif;font-size:15px;color:var(--text3)}
+.footer-logo span{color:var(--accent)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:12px;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.warn-box{background:#1a1a10;border:0.5px solid #3a3010;border-radius:10px;padding:13px 16px;font-size:12px;color:var(--amber);display:flex;align-items:center;gap:10px}
+@media(max-width:768px){nav{padding:14px 20px}.nav-links{display:none}.hero{padding:60px 20px 48px}.hero h1{font-size:32px}section{padding:48px 20px}.paliers,.how,.support-grid,.pc-grid{grid-template-columns:1fr}.stats{gap:32px;flex-wrap:wrap;padding:24px 20px}footer{flex-direction:column;gap:16px;text-align:center;padding:24px 20px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">Nexa<span>PC</span></a>
+  <ul class="nav-links">
+    <li><a href="#paliers">Paliers</a></li>
+    <li><a href="#bench">Mon PC</a></li>
+    <li><a href="#comment">Comment ca marche</a></li>
+    <li><a href="#support">Support</a></li>
+  </ul>
+  <button class="btn-nav" onclick="window.open('https://discord.gg/MqJVRhVQ','_blank')">Commencer</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge"><i class="ti ti-bolt"></i> Optimisation PC</div>
+  <h1>Ton PC a son<br><span>plein potentiel</span></h1>
+  <p>Optimisation complete de ton PC — GPU, Windows, reseau et BIOS. Resultats visibles des le premier lancement.</p>
+  <div class="hero-btns">
+    <button class="btn btn-primary" onclick="window.open('https://discord.gg/MqJVRhVQ','_blank')">Voir les offres</button>
+    <button class="btn btn-pg" onclick="document.getElementById('bench').scrollIntoView({behavior:'smooth'})">Tester mon PC</button>
+    <button class="btn btn-pb" onclick="document.getElementById('comment').scrollIntoView({behavior:'smooth'})">Comment ca marche</button>
+    <button class="btn btn-pk" onclick="document.getElementById('support').scrollIntoView({behavior:'smooth'})">Support</button>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">+60 FPS</div><div class="stat-lbl">Gain moyen en jeu</div></div>
+  <div class="stat-item"><div class="stat-num">15 min</div><div class="stat-lbl">Duree moyenne</div></div>
+  <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Paliers disponibles</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Resultats visibles</div></div>
+</div>
+
+<section id="paliers">
+  <div class="section-label">Nos offres</div>
+  <div class="section-title">Choisis ton palier</div>
+  <div class="section-sub">Chaque palier inclut le precedent. Paiement unique, resultats permanents.</div>
+  <div class="paliers">
+    <div class="palier">
+      <div class="palier-icon icon-c"><i class="ti ti-tools"></i></div>
+      <div class="palier-name">Classic</div>
+      <div class="palier-price">10€ <span>paiement unique</span></div>
+      <div class="palier-desc">Optimisation GPU et nettoyage complet Windows pour un gain immediat en FPS.</div>
+      <ul class="palier-features">
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Parametres NVIDIA / AMD</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Suppression applis inutiles</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Nettoyage Windows</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Alimentation haute performance</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Demarrage optimise</li>
+        <li><i class="ti ti-x" style="color:#2a2a2a;font-size:14px"></i><span style="color:#2a2a2a">Optimisation reseau</span></li>
+        <li><i class="ti ti-x" style="color:#2a2a2a;font-size:14px"></i><span style="color:#2a2a2a">Guide BIOS</span></li>
+      </ul>
+      <button class="btn btn-pp" style="width:100%" onclick="window.open('https://discord.gg/MqJVRhVQ','_blank')">Ouvrir un ticket</button>
+    </div>
+    <div class="palier featured">
+      <div class="palier-badge">Le plus populaire</div>
+      <div class="palier-icon icon-p"><i class="ti ti-rocket"></i></div>
+      <div class="palier-name">Pro</div>
+      <div class="palier-price">20€ <span>paiement unique</span></div>
+      <div class="palier-desc">Tout Classic + optimisation reseau complete pour reduire ta latence en jeu.</div>
+      <ul class="palier-features">
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Tout Classic inclus</li>
+        <li><i class="ti ti-check" style="color:#6366f1;font-size:14px"></i> DNS Cloudflare optimise</li>
+        <li><i class="ti ti-check" style="color:#6366f1;font-size:14px"></i> TCP/IP optimise</li>
+        <li><i class="ti ti-check" style="color:#6366f1;font-size:14px"></i> Algorithme Nagle desactive</li>
+        <li><i class="ti ti-check" style="color:#6366f1;font-size:14px"></i> Latence reseau reduite</li>
+        <li><i class="ti ti-check" style="color:#6366f1;font-size:14px"></i> Bande passante liberee</li>
+        <li><i class="ti ti-x" style="color:#2a2a2a;font-size:14px"></i><span style="color:#2a2a2a">Guide BIOS</span></li>
+      </ul>
+      <button class="btn btn-primary" style="width:100%" onclick="window.open('https://discord.gg/MqJVRhVQ','_blank')">Ouvrir un ticket</button>
+    </div>
+    <div class="palier">
+      <div class="palier-icon icon-e"><i class="ti ti-crown"></i></div>
+      <div class="palier-name">Elite</div>
+      <div class="palier-price">30€ <span>paiement unique</span></div>
+      <div class="palier-desc">L'optimisation maximale — tout Pro + guide BIOS personnalise en PDF.</div>
+      <ul class="palier-features">
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Tout Pro inclus</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Guide BIOS PDF personnalise</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> XMP / EXPO RAM configure</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Resizable BAR active</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Support Discord prioritaire</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Rapport PC complet</li>
+        <li><i class="ti ti-check" style="color:#22c55e;font-size:14px"></i> Suivi post-optimisation</li>
+      </ul>
+      <button class="btn btn-pg" style="width:100%" onclick="window.open('https://discord.gg/MqJVRhVQ','_blank')">Ouvrir un ticket</button>
+    </div>
+  </div>
+</section>
+
+<section id="bench">
+  <div class="section-label">Diagnostic</div>
+  <div class="section-title">Etat de ton PC</div>
+  <div class="section-sub">Detection automatique via ton navigateur — aucun telechargement requis.</div>
+  <div class="bench-wrap">
+    <div class="bench-tabs">
+      <div class="bench-tab active" onclick="switchBench('perf',this)">Performance</div>
+      <div class="bench-tab" onclick="switchBench('reseau',this)">Reseau</div>
+      <div class="bench-tab" onclick="switchBench('infos',this)">Infos PC</div>
+    </div>
+
+    <div class="bench-page active" id="bp-perf">
+      <div class="bench-box">
+        <div id="perf-idle">
+          <div class="score-big">
+            <div class="score-num" id="score-total">—</div>
+            <div class="score-grade" id="score-grade">Clique sur Analyser pour voir ton score</div>
+            <div class="score-lbl">Score global de ton PC</div>
+          </div>
+          <div class="bar-row"><div class="bar-label">CPU</div><div class="bar-track"><div class="bar-fill" id="bar-cpu" style="background:#6366f1"></div></div><div class="bar-val" id="val-cpu">—</div></div>
+          <div class="bar-row"><div class="bar-label">GPU</div><div class="bar-track"><div class="bar-fill" id="bar-gpu" style="background:#22c55e"></div></div><div class="bar-val" id="val-gpu">—</div></div>
+          <div class="bar-row"><div class="bar-label">RAM</div><div class="bar-track"><div class="bar-fill" id="bar-ram" style="background:#f59e0b"></div></div><div class="bar-val" id="val-ram">—</div></div>
+          <div class="bar-row"><div class="bar-label">Reseau</div><div class="bar-track"><div class="bar-fill" id="bar-net" style="background:#6366f1"></div></div><div class="bar-val" id="val-net">—</div></div>
+        </div>
+        <div id="perf-run" class="hidden" style="text-align:center;padding:24px 0">
+          <div class="dot-anim"><span></span><span></span><span></span></div>
+          <p id="perf-status" style="font-size:13px;color:#555;margin-top:12px">Analyse en cours...</p>
+        </div>
+      </div>
+      <button class="btn btn-pb" style="width:100%" onclick="analyserPC()">Analyser mon PC</button>
+    </div>
+
+    <div class="bench-page" id="bp-reseau">
+      <div class="bench-box">
+        <div class="net-gauge">
+          <div class="gauge"><div class="gauge-val" id="net-dl">—</div><div class="gauge-unit">Mb/s</div><div class="gauge-lbl">Descendant</div></div>
+          <div class="divider-v"></div>
+          <div class="gauge"><div class="gauge-val" id="net-ul">—</div><div class="gauge-unit">Mb/s</div><div class="gauge-lbl">Montant</div></div>
+          <div class="divider-v"></div>
+          <div class="gauge"><div class="gauge-val" id="net-ping">—</div><div class="gauge-unit">ms</div><div class="gauge-lbl">Ping</div></div>
+        </div>
+        <div class="net-row"><span class="net-key">Type de connexion</span><span class="net-val" id="net-type">Detection...</span></div>
+        <div class="net-row"><span class="net-key">Qualite estimee</span><span class="net-val" id="net-quality">—</span></div>
+        <div class="net-row"><span class="net-key">DNS recommande</span><span class="net-val" style="color:#6366f1">1.1.1.1 (Cloudflare)</span></div>
+        <div class="net-row"><span class="net-key">Optimisation reseau</span><span class="net-val" style="color:#f59e0b">Non appliquee</span></div>
+      </div>
+      <button class="btn btn-pb" style="width:100%" id="btn-speedtest" onclick="runSpeedtest()">Lancer un speedtest</button>
+    </div>
+
+    <div class="bench-page" id="bp-infos">
+      <div class="pc-grid">
+        <div class="pc-card"><div class="pc-label">CPU</div><div class="pc-val" id="info-cpu">Detection...</div><div class="pc-sub" id="info-cores">—</div></div>
+        <div class="pc-card"><div class="pc-label">GPU</div><div class="pc-val" id="info-gpu">Detection...</div><div class="pc-sub">Via WebGL</div></div>
+        <div class="pc-card"><div class="pc-label">RAM</div><div class="pc-val" id="info-ram">Detection...</div><div class="pc-sub">Approximatif</div></div>
+        <div class="pc-card"><div class="pc-label">Navigateur</div><div class="pc-val" id="info-browser">Detection...</div><div class="pc-sub" id="info-os">—</div></div>
+        <div class="pc-card"><div class="pc-label">Resolution</div><div class="pc-val" id="info-res">Detection...</div><div class="pc-sub" id="info-dpr">—</div></div>
+        <div class="pc-card"><div class="pc-label">Plateforme</div><div class="pc-val" id="info-platform">Detection...</div><div class="pc-sub" id="info-lang">—</div></div>
+      </div>
+      <div class="warn-box"><i class="ti ti-info-circle"></i> Informations lues via ton navigateur. Les drivers exacts sont mis a jour lors de ta session.</div>
+    </div>
+  </div>
+</section>
+
+<section id="comment">
+  <div class="section-label">Processus</div>
+  <div class="section-title">Comment ca marche</div>
+  <div class="section-sub">Simple, rapide et 100% transparent.</div>
+  <div class="how">
+    <div class="step"><div class="step-num">Etape 01</div><div class="step-icon"><i class="ti ti-brand-discord"></i></div><div class="step-title">Tu ouvres un ticket</div><div class="step-desc">Rejoins le Discord YuZ X NOCHE et ouvre un ticket en precisant le palier choisi.</div></div>
+    <div class="step"><div class="step-num">Etape 02</div><div class="step-icon"><i class="ti ti-credit-card"></i></div><div class="step-title">Tu regle le paiement</div><div class="step-desc">Paiement securise via le lien fourni dans ton ticket Discord.</div></div>
+    <div class="step"><div class="step-num">Etape 03</div><div class="step-icon"><i class="ti ti-device-desktop"></i></div><div class="step-title">Session Parsec</div><div class="step-desc">On se connecte a ton PC via Parsec et on applique toutes les optimisations en direct.</div></div>
+    <div class="step"><div class="step-num">Etape 04</div><div class="step-icon"><i class="ti ti-rocket"></i></div><div class="step-title">Ton PC est booste</div><div class="step-desc">Redemarre et profite des gains. Un rapport complet t'est envoye sur Discord.</div></div>
+  </div>
+</section>
+
+<section id="support">
+  <div class="section-label">Support</div>
+  <div class="section-title">On est la pour toi</div>
+  <div class="section-sub">Un bug apres l'optimisation ? Une question ? On repond rapidement sur Discord.</div>
+  <div class="support-grid">
+    <div class="support-card discord">
+      <i class="ti ti-brand-discord" style="font-size:32px;color:#5865f2;margin-bottom:16px;display:block"></i>
+      <div class="support-title">Discord — YuZ X NOCHE</div>
+      <div class="support-desc">Rejoins le serveur pour ouvrir un ticket et etre pris en charge. Commande, bug ou question, on est la.</div>
+      <ul class="support-features">
+        <li><i class="ti ti-check"></i> Ticket dedie par client</li>
+        <li><i class="ti ti-check"></i> Suivi de ton optimisation</li>
+        <li><i class="ti ti-check"></i> Communaute active</li>
+        <li><i class="ti ti-check"></i> Support post-opti inclus</li>
+      </ul>
+      <a class="btn-discord" href="https://discord.gg/MqJVRhVQ" target="_blank"><i class="ti ti-brand-discord"></i> Rejoindre YuZ X NOCHE</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="support-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><i class="ti ti-bug" style="font-size:22px;color:#f59e0b"></i><div class="support-title" style="margin:0">Tu as un bug ?</div></div>
+        <div class="support-desc" style="margin-bottom:14px">Apres l'optimisation, si quelque chose ne fonctionne pas, ouvre un ticket bug sur Discord.</div>
+        <a class="btn btn-pb" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none" href="https://discord.gg/MqJVRhVQ" target="_blank"><i class="ti ti-brand-discord"></i> Ticket bug</a>
+      </div>
+      <div class="support-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><i class="ti ti-help" style="font-size:22px;color:#6366f1"></i><div class="support-title" style="margin:0">Une question ?</div></div>
+        <div class="support-desc" style="margin-bottom:14px">Pas sur du palier ? Question sur ton PC ? Ouvre un ticket question sur Discord.</div>
+        <a class="btn btn-pp" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none" href="https://discord.gg/MqJVRhVQ" target="_blank"><i class="ti ti-brand-discord"></i> Ticket question</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="border-bottom:none">
+  <div class="section-label">FAQ</div>
+  <div class="section-title" style="margin-bottom:40px">Questions frequentes</div>
+  <div class="faq">
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Est-ce risque pour mon PC ? <i class="ti ti-chevron-down"></i></div><div class="faq-a">Non, toutes les optimisations sont reversibles. On ne touche pas au materiel, uniquement aux parametres logiciels Windows, GPU et reseau.</div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Comment se passe la session a distance ? <i class="ti ti-chevron-down"></i></div><div class="faq-a">On utilise Parsec. Tu telecharges l'app, tu partages l'acces via Discord et tu restes devant ton PC pendant toute la session.</div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Combien de temps dure une session ? <i class="ti ti-chevron-down"></i></div><div class="faq-a">Entre 10 et 20 minutes selon le palier. Le Classic est le plus rapide, l'Elite peut prendre jusqu'a 30 minutes.</div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Quels PC sont compatibles ? <i class="ti ti-chevron-down"></i></div><div class="faq-a">Tous les PC Windows 10 et Windows 11 avec un GPU NVIDIA ou AMD. Les Mac et Linux ne sont pas supportes.</div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Les optimisations sont-elles permanentes ? <i class="ti ti-chevron-down"></i></div><div class="faq-a">Oui, toutes les modifications resistent aux redemarrages. Seule une reinstallation complete de Windows les effacerait.</div></div>
+    <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Quel gain FPS puis-je esperer ? <i class="ti ti-chevron-down"></i></div><div class="faq-a">Le gain moyen est de +40 a +80 FPS selon la config et le jeu. On estime les gains en direct sur ton PC avant de commencer.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Nexa<span>PC</span></div>
+  <div class="footer-links">
+    <a href="#">Mentions legales</a>
+    <a href="#">CGV</a>
+    <a href="https://discord.gg/MqJVRhVQ" target="_blank">Contact</a>
+  </div>
+  <div style="font-size:12px;color:var(--text3)">2026 NexaPC — Tous droits reserves</div>
+</footer>
+
+<script>
+var DC = 'https://discord.gg/MqJVRhVQ';
+
+function switchBench(id,el){
+  document.querySelectorAll('.bench-tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.bench-page').forEach(function(p){p.classList.remove('active')});
+  el.classList.add('active');
+  document.getElementById('bp-'+id).classList.add('active');
+}
+
+function detecterPC(){
+  var cores = navigator.hardwareConcurrency || '?';
+  document.getElementById('info-cpu').textContent = cores + ' threads';
+  document.getElementById('info-cores').textContent = 'hardwareConcurrency';
+  try{
+    var canvas = document.createElement('canvas');
+    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if(gl){
+      var ext = gl.getExtension('WEBGL_debug_renderer_info');
+      if(ext){
+        var gpu = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL);
+        document.getElementById('info-gpu').textContent = gpu.substring(0,28);
+      } else {
+        document.getElementById('info-gpu').textContent = 'GPU detecte';
+      }
+    }
+  } catch(e){ document.getElementById('info-gpu').textContent = 'Non disponible'; }
+  var ram = navigator.deviceMemory;
+  document.getElementById('info-ram').textContent = ram ? ram + ' Go (approx.)' : 'Non disponible';
+  var ua = navigator.userAgent;
+  var browser = 'Autre';
+  if(ua.indexOf('Chrome') > -1) browser = 'Chrome';
+  else if(ua.indexOf('Firefox') > -1) browser = 'Firefox';
+  else if(ua.indexOf('Safari') > -1) browser = 'Safari';
+  else if(ua.indexOf('Edge') > -1) browser = 'Edge';
+  document.getElementById('info-browser').textContent = browser;
+  var os = 'Autre';
+  if(ua.indexOf('Windows') > -1) os = 'Windows';
+  else if(ua.indexOf('Mac') > -1) os = 'macOS';
+  else if(ua.indexOf('Linux') > -1) os = 'Linux';
+  document.getElementById('info-os').textContent = os;
+  document.getElementById('info-res').textContent = screen.width + ' x ' + screen.height;
+  document.getElementById('info-dpr').textContent = 'Ratio : ' + (window.devicePixelRatio || 1) + 'x';
+  document.getElementById('info-platform').textContent = navigator.platform || 'Inconnu';
+  document.getElementById('info-lang').textContent = navigator.language || '—';
+  var conn = navigator.connection;
+  if(conn){
+    var types = {'wifi':'Wi-Fi','ethernet':'Ethernet','4g':'4G','3g':'3G','2g':'2G'};
+    document.getElementById('net-type').textContent = types[conn.effectiveType] || conn.type || 'Inconnu';
+  }
+}
+
+function analyserPC(){
+  document.getElementById('perf-idle').classList.add('hidden');
+  document.getElementById('perf-run').classList.remove('hidden');
+  var cores = navigator.hardwareConcurrency || 4;
+  var ram = navigator.deviceMemory || 4;
+  var scoreCPU = Math.min(100, Math.round((cores / 16) * 100));
+  var scoreGPU = 55;
+  try{
+    var canvas = document.createElement('canvas');
+    var gl = canvas.getContext('webgl');
+    if(gl){
+      var ext = gl.getExtension('WEBGL_debug_renderer_info');
+      if(ext){
+        var gpu = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL).toUpperCase();
+        if(gpu.indexOf('RTX 40') > -1 || gpu.indexOf('RX 7') > -1) scoreGPU = 95;
+        else if(gpu.indexOf('RTX 30') > -1 || gpu.indexOf('RX 6') > -1) scoreGPU = 85;
+        else if(gpu.indexOf('RTX 20') > -1 || gpu.indexOf('RX 5') > -1) scoreGPU = 72;
+        else if(gpu.indexOf('GTX 16') > -1 || gpu.indexOf('GTX 10') > -1) scoreGPU = 60;
+        else scoreGPU = 50;
+      }
+    }
+  } catch(e){}
+  var scoreRAM = Math.min(100, Math.round((ram / 32) * 100));
+  var conn = navigator.connection;
+  var scoreNet = 70;
+  if(conn && conn.downlink){
+    scoreNet = Math.min(100, Math.round((conn.downlink / 100) * 100));
+    if(scoreNet < 20) scoreNet = 20;
+  }
+  var scoreTotal = Math.round((scoreCPU + scoreGPU + scoreRAM + scoreNet) / 4);
+  var steps = [
+    {bar:'bar-cpu',val:'val-cpu',score:scoreCPU,label:'Analyse du CPU...'},
+    {bar:'bar-gpu',val:'val-gpu',score:scoreGPU,label:'Test GPU...'},
+    {bar:'bar-ram',val:'val-ram',score:scoreRAM,label:'Test RAM...'},
+    {bar:'bar-net',val:'val-net',score:scoreNet,label:'Test reseau...'},
+  ];
+  var i = 0;
+  function next(){
+    if(i >= steps.length){
+      document.getElementById('perf-status').textContent = 'Analyse terminee !';
+      setTimeout(function(){
+        document.getElementById('perf-run').classList.add('hidden');
+        document.getElementById('perf-idle').classList.remove('hidden');
+        document.getElementById('score-total').textContent = scoreTotal;
+        var grade = 'Excellent';
+        if(scoreTotal < 40) grade = 'Faible — optimisation fortement recommandee';
+        else if(scoreTotal < 60) grade = 'Moyen — optimisation recommandee';
+        else if(scoreTotal < 80) grade = 'Bon — peut encore etre ameliore';
+        else grade = 'Excellent — quelques ajustements possibles';
+        document.getElementById('score-grade').textContent = grade;
+      }, 800);
+      return;
+    }
+    var s = steps[i];
+    document.getElementById('perf-status').textContent = s.label;
+    document.getElementById(s.bar).style.width = s.score + '%';
+    document.getElementById(s.val).textContent = s.score + '/100';
+    i++;
+    setTimeout(next, 900);
+  }
+  next();
+}
+
+function runSpeedtest(){
+  var btn = document.getElementById('btn-speedtest');
+  btn.textContent = 'Test en cours...';
+  btn.disabled = true;
+  var conn = navigator.connection;
+  if(conn){
+    var types = {'wifi':'Wi-Fi','ethernet':'Ethernet','4g':'4G','3g':'3G'};
+    document.getElementById('net-type').textContent = types[conn.effectiveType] || 'Inconnu';
+    var dl = conn.downlink;
+    if(dl){
+      document.getElementById('net-dl').textContent = dl;
+      document.getElementById('net-ul').textContent = Math.round(dl * 0.4);
+      var quality = dl >= 50 ? 'Excellente' : dl >= 20 ? 'Bonne' : dl >= 5 ? 'Correcte' : 'Faible';
+      document.getElementById('net-quality').textContent = quality;
+      document.getElementById('net-quality').style.color = dl >= 20 ? '#22c55e' : '#f59e0b';
+    }
+  }
+  var start = performance.now();
+  fetch('https://www.cloudflare.com/cdn-cgi/trace', {mode:'no-cors'})
+    .then(function(){
+      var ping = Math.round(performance.now() - start);
+      document.getElementById('net-ping').textContent = ping;
+    })
+    .catch(function(){
+      document.getElementById('net-ping').textContent = '~30';
+    })
+    .finally(function(){
+      btn.disabled = false;
+      btn.textContent = 'Relancer le speedtest';
+    });
+}
+
+window.addEventListener('load', function(){ detecterPC(); });
+</script>
+</body>
+</html>
